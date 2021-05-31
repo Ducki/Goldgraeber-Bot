@@ -1,9 +1,8 @@
 import sys
 import sqlite3
+import telegram
 from sqlite3.dbapi2 import Cursor
 from typing import Dict
-from telegram import update, message, user
-import telegram
 from telegram.ext import Updater, CallbackContext, MessageHandler, Filters
 
 
