@@ -13,7 +13,7 @@ def main():
     global triggers
     triggers = get_triggers(cursor)
 
-    token = sys.argv[1:]
+    token = sys.argv[1]
     init_telegram_connection(token)
 
 
@@ -33,7 +33,7 @@ def handle_message(update: telegram.Update, context: CallbackContext) -> None:
     if trigger_id is None:
         return
 
-    answer = get_random_answer_by_searchstring(cursor, trigger_id)
+    answer = get_random_answer_by_trigger(cursor, trigger_id)
     update.message.reply_text(answer)
 
 
@@ -52,7 +52,7 @@ def search_trigger_in_message(triggers: Dict, message: str) -> any:
     return None
 
 
-def get_random_answer_by_searchstring(_cursor: Cursor, trigger_id: int) -> str:
+def get_random_answer_by_trigger(_cursor: Cursor, trigger_id: int) -> str:
     result = _cursor.execute("""SELECT
                                 answer
                             FROM Triggers
